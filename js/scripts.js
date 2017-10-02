@@ -108,6 +108,7 @@ function setGamePoints() {
     computerPointsElem.innerHTML = computer.score;
 }
 
+//Moja funkcja
 function endOfGame() {
 	if (player.score == 10) {
 		alert("You win! Your total is " + player.score);
