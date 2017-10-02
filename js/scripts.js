@@ -21,13 +21,13 @@ var computerResultElem = document.getElementById('js-computerResult');
 
 
 pickRock.addEventListener('click', function() {
-  playerPick('rock')
+  playerPick('rock');
 });
 pickPaper.addEventListener('click', function() {
-  playerPick('paper')
+  playerPick('paper');
 });
 pickScissors.addEventListener('click', function() {
-  playerPick('scissors')
+  playerPick('scissors');
 });
 
 var gameState = 'notStarted', //started // ended
@@ -48,6 +48,7 @@ function setGameElements() {
       break;
     case 'ended':
       newGameBtn.innerText = 'Jeszcze raz';
+      playerResultElem.innerHTML = computerResultElem.innerHTML = '';
     case 'notStarted':
     default:
       newGameElem.style.display = 'block';
@@ -121,12 +122,10 @@ function endOfGame() {
   if (player.score == 10) {
     alert("You win! Your total is " + player.score);
     gameState = 'ended';
-    playerResultElem.innerHTML = computerResultElem.innerHTML = '';
   } 
   else if (computer.score == 10) {
     alert("You lose! Your total is " + player.score);
     gameState = 'ended';
-    playerResultElem.innerHTML = computerResultElem.innerHTML = '';
   } 
   else {
     gameState = 'started';
