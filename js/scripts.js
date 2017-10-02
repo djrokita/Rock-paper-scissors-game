@@ -20,33 +20,39 @@ var playerResultElem = document.getElementById('js-playerResult');
 var computerResultElem = document.getElementById('js-computerResult');
 
 
-pickRock.addEventListener('click', function() { playerPick('rock') });
-pickPaper.addEventListener('click', function() { playerPick('paper') });
-pickScissors.addEventListener('click', function() { playerPick('scissors') });
+pickRock.addEventListener('click', function() {
+  playerPick('rock')
+});
+pickPaper.addEventListener('click', function() {
+  playerPick('paper')
+});
+pickScissors.addEventListener('click', function() {
+  playerPick('scissors')
+});
 
-var gameState = 'notStarted',  //started // ended
-    player = {
-        name: '',
-        score: 0
-    },
-    computer = {
-        score: 0
-    };
+var gameState = 'notStarted', //started // ended
+  player = {
+    name: '',
+    score: 0
+  },
+  computer = {
+    score: 0
+  };
 
 function setGameElements() {
-  switch(gameState) {
+  switch (gameState) {
     case 'started':
-        newGameElem.style.display = 'none';
-        pickElem.style.display = 'block';
-        resultsElem.style.display = 'block';
+      newGameElem.style.display = 'none';
+      pickElem.style.display = 'block';
+      resultsElem.style.display = 'block';
       break;
     case 'ended':
-        newGameBtn.innerText = 'Jeszcze raz';
+      newGameBtn.innerText = 'Jeszcze raz';
     case 'notStarted':
     default:
-        newGameElem.style.display = 'block';
-        pickElem.style.display = 'none';
-        resultsElem.style.display = 'none';
+      newGameElem.style.display = 'block';
+      pickElem.style.display = 'none';
+      resultsElem.style.display = 'none';
   }
 }
 
@@ -58,22 +64,22 @@ function newGame() {
     setGameElements();
 
     playerNameElem.innerHTML = player.name;
-    setGamePoints(); 
-    }
+    setGamePoints();
+  }
 }
 
 function getComputerPick() {
-    var possiblePicks = ['rock', 'paper', 'scissors'];
-    return possiblePicks[Math.floor(Math.random()*3)];
+  var possiblePicks = ['rock', 'paper', 'scissors'];
+  return possiblePicks[Math.floor(Math.random() * 3)];
 }
 
 function playerPick(playerPick) {
-    var computerPick = getComputerPick();
+  var computerPick = getComputerPick();
 
-    playerPickElem.innerHTML = playerPick;
-    computerPickElem.innerHTML = computerPick;
+  playerPickElem.innerHTML = playerPick;
+  computerPickElem.innerHTML = computerPick;
 
-    checkRoundWinner(playerPick, computerPick);
+  checkRoundWinner(playerPick, computerPick);
 }
 
 function checkRoundWinner(playerPick, computerPick) {
@@ -81,49 +87,51 @@ function checkRoundWinner(playerPick, computerPick) {
 
   var winnerIs = 'player';
 
-    if (playerPick == computerPick) {
-        winnerIs = 'noone'; // remis
-    } else if (
-        (computerPick == 'rock' &&  playerPick == 'scissors') ||
-        (computerPick == 'scissors' &&  playerPick == 'paper') ||
-        (computerPick == 'paper' &&  playerPick == 'rock')) {
+  if (playerPick == computerPick) {
+    winnerIs = 'noone'; // remis
+  } 
+  else if (
+    (computerPick == 'rock' && playerPick == 'scissors') ||
+    (computerPick == 'scissors' && playerPick == 'paper') ||
+    (computerPick == 'paper' && playerPick == 'rock')) {
 
-        winnerIs = 'computer';
-    }
-
-    if (winnerIs == 'player') {
-        playerResultElem.innerHTML = "Win!";
-        player.score++;
-        console.log('player: ' + player.score); //Mój kod do testów
-    } else if (winnerIs == 'computer') {
-        computerResultElem.innerHTML = "Win!";
-        computer.score++;
-        console.log('computer: ' + computer.score); //Mój kod do testów
-    }
-    endOfGame();  //Mój kod
+    winnerIs = 'computer';
+  }
+  if (winnerIs == 'player') {
+    playerResultElem.innerHTML = "Win!";
+    player.score++;
+    console.log('player: ' + player.score); //Mój kod do testów
+  } 
+  else if (winnerIs == 'computer') {
+    computerResultElem.innerHTML = "Win!";
+    computer.score++;
+    console.log('computer: ' + computer.score); //Mój kod do testów
+  }
+  setGamePoints();
+  endOfGame(); //Mój kod
 }
 
 function setGamePoints() {
-    playerPointsElem.innerHTML = player.score;
-    computerPointsElem.innerHTML = computer.score;
+  playerPointsElem.innerHTML = player.score;
+  computerPointsElem.innerHTML = computer.score;
 }
 
 //Moja funkcja
 function endOfGame() {
-	if (player.score == 10) {
-		alert("You win! Your total is " + player.score);
-		gameState = 'ended';
-	}
-	else if (computer.score == 10) {
-		alert("You lose! Your total is " + player.score);
-		gameState = 'ended';
-	}
-	else {
-		gameState = 'started';
-	}
-	setGameElements();
+  if (player.score == 2) {
+    alert("You win! Your total is " + player.score);
+    gameState = 'ended';
+    playerResultElem.innerHTML = computerResultElem.innerHTML = '';
+  } 
+  else if (computer.score == 2) {
+    alert("You lose! Your total is " + player.score);
+    gameState = 'ended';
+    playerResultElem.innerHTML = computerResultElem.innerHTML = '';
+  } 
+  else {
+    gameState = 'started';
+  }
+  setGameElements();
 }
 
 setGameElements();
-
-
