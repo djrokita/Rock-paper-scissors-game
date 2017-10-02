@@ -118,12 +118,12 @@ function setGamePoints() {
 
 //Moja funkcja
 function endOfGame() {
-  if (player.score == 2) {
+  if (player.score == 10) {
     alert("You win! Your total is " + player.score);
     gameState = 'ended';
     playerResultElem.innerHTML = computerResultElem.innerHTML = '';
   } 
-  else if (computer.score == 2) {
+  else if (computer.score == 10) {
     alert("You lose! Your total is " + player.score);
     gameState = 'ended';
     playerResultElem.innerHTML = computerResultElem.innerHTML = '';
